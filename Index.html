@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Payment Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .benefits {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        .benefits h2 {
+            color: #4776E6;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: #4776E6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .payment-section {
+            background: white;
+            padding: 25px;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .payment-section h2 {
+            color: #4776E6;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .pricing {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #4776E6;
+            margin: 10px 0;
+        }
+        
+        .weekly-earnings {
+            background: linear-gradient(135deg, #4cd964 0%, #2ecc71 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: #4776E6;
+            background: #f0f5ff;
+        }
+        
+        .payment-option.active {
+            border-color: #4776E6;
+            background: #f0f5ff;
+            position: relative;
+        }
+        
+        .payment-option.active::after {
+            content: '✓';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #4776E6;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .payment-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #4776E6;
+            outline: none;
+        }
+        
+        .pay-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+        }
+        
+        .pay-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .security-note i {
+            margin-right: 10px;
+            color: #4cd964;
+        }
+        
+        .countdown {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff4e5;
+            border-radius: 10px;
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #ff9f43;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .highlight {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Premium Investment Plan</h1>
+            <p>Invest today and start earning ₹2,200 weekly returns</p>
+        </div>
+        
+        <div class="content">
+            <div class="benefits">
+                <h2>Why Choose This Plan?</h2>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3>High Returns</h3>
+                        <p>Earn ₹2,200 every week on your investment</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h3>Secure Investment</h3>
+                        <p>Your funds are protected with advanced security</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3>Quick Start</h3>
+                        <p>Begin earning returns within 24 hours</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div>
+                        <h3>Flexible Withdrawal</h3>
+                        <p>Withdraw your earnings anytime without fees</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div>
+                        <h3>Dedicated Support</h3>
+                        <p>24/7 customer support for all your queries</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-section">
+                <h2>Make Your Investment</h2>
+                
+                <div class="pricing">
+                    <p>One-Time Investment</p>
+                    <div class="price">₹5,500</div>
+                    <div class="weekly-earnings">
+                        <i class="fas fa-coins"></i> Earn ₹2,200 Weekly
+                    </div>
+                </div>
+                
+                <div class="payment-options">
+                    <div class="payment-option active">
+                        <i class="fas fa-credit-card"></i>
+                        <p>Credit Card</p>
+                    </div>
+                    <div class="payment-option">
+                        <i class="fas fa-university"></i>
+                        <p>Net Banking</p>
+                    </div>
+                    <div class="payment-option">
+                        <i class="fab fa-paypal"></i>
+                        <p>PayPal</p>
+                    </div>
+                    <div class="payment-option">
+                        <i class="fas fa-mobile-alt"></i>
+                        <p>UPI</p>
+                    </div>
+                </div>
+                
+                <div class="payment-form">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardHolder">Card Holder Name</label>
+                        <input type="text" id="cardHolder" placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-group" style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                        <div>
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" placeholder="MM/YY">
+                        </div>
+                        <div>
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123">
+                        </div>
+                    </div>
+                    
+                    <button class="pay-button">
+                        Invest Now - ₹5,500
+                    </button>
+                    
+                    <div class="security-note">
+                        <i class="fas fa-lock"></i>
+                        <p>Your payment is secured with 256-bit SSL encryption</p>
+                    </div>
+                </div>
+                
+                <div class="countdown">
+                    <i class="fas fa-bolt"></i> 
+                    Special offer ends in: <span class="highlight">12:45:33</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Premium Investment Plan. All rights reserved. | <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a></p>
+            <p style="margin-top: 10px;">Returns are based on market performance and are not guaranteed <span class="badge">Important</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Simple payment option selection
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.payment-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Countdown timer simulation
+        function updateCountdown() {
+            const countdownElement = document.querySelector('.highlight');
+            let time = countdownElement.textContent.split(':');
+            let hours = parseInt(time[0]);
+            let minutes = parseInt(time[1]);
+            let seconds = parseInt(time[2]);
+            
+            seconds--;
+            
+            if (seconds < 0) {
+                seconds = 59;
+                minutes--;
+                
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                    
+                    if (hours < 0) {
+                        hours = 0;
+                        minutes = 0;
+                        seconds = 0;
+                    }
+                }
+            }
+            
+            countdownElement.textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        
+        // Add some interactive animations
+        document.querySelector('.pay-button').addEventListener('mouseover', function() {
+            this.style.boxShadow = '0 7px 20px rgba(0, 0, 0, 0.2)';
+        });
+        
+        document.querySelector('.pay-button').addEventListener('mouseout', function() {
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+        });
+    </script>
+</body>
+</html>
